@@ -2,8 +2,44 @@ package com.bobo.common.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
+	
+	
+	public static String toHtml(String src) {
+		//把所有\r\n替换成 |
+		String str1 = src.replaceAll(System.getProperty("line.separator"), "|");
+		//把所有\r替换成<br>
+		String str2 = str1.replace("\\r", "</br>");
+		String[] split = str2.split("\\|");
+		String newStr="";
+		for (String str : split) {
+			newStr+="<p>"+str+"</p>";
+		}
+		return newStr;
+	}
+	
+	/*
+	* 方法功能：根据正则在字符串提取一段值，用于后面在url地址里提取ID值。
+	* 例如在“http://news.cnstock.com/news,yw-201908-4413224.htm”把“4413224”提取出来。
+	*/
+	public static String getPlaceholderValue(String src, String regex){
+		        //编译规则
+				Pattern p = Pattern.compile(regex);
+				//匹配规则
+				Matcher m = p.matcher(src);
+				if(m.find()) {
+					//返回匹配的内容
+					return m.group();
+				}
+				return null;
+		
+	}
+	
+	
+	
 	// 方法1：判断源字符串是否有值，空引号(空白字符串)也算没值 (5分)
 	public static boolean hasLength(String src) {
 		return null!=src && src.length()>0;

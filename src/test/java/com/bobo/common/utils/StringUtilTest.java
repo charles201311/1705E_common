@@ -9,6 +9,16 @@ import java.util.Date;
 import org.junit.Test;
 
 public class StringUtilTest {
+	
+	
+	@Test
+	public void testToHtml() {
+		String src="aaaaaaaaaaaaa\r\n"
+				+ "dddddd\rdddddddd";
+		String html = StringUtil.toHtml(src);
+		System.out.println(html);
+		
+	}
 
 	@Test
 	public void testHasLength() {
